@@ -1,0 +1,89 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+# Overwrite a default_prompt_order and  use custom prompt_order
+prompt_order=["directory",
+    "git_branch",
+    "git_commit",
+    "git_state",
+    "git_status",
+    "character"]
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]      # The name of the module we are configuring is "character"
+symbol = "❯"     # The "symbol" segment is being set to "➜"
+error_symbol = "●"
+#use_symbol_for_status = true
+
+
+
+[package]
+disabled = true
+symbol = " "
+
+[time]
+disabled = true
+
+[battery]
+disabled = true
+full_symbol = ""
+charging_symbol = ""
+discharging_symbol = ""
+
+[aws]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[docker]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[golang]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+disabled = true
+symbol = " "
+
+[php]
+symbol = " "
+
+[python]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbo = " "
