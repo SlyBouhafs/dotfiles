@@ -7,17 +7,22 @@
 call plug#begin(stdpath('data') . '/plugged')
 
   " # Dracula Theme
-  Plug 'dracula/vim'
+  Plug 'dracula/vim', { 'as': 'dracula' } 
 
   " # Better indent lines
   Plug 'yggdroot/indentline'
 
-  " # Tcomment easy Code Commenter
-  Plug 'tomtom/tcomment_vim'
+  " # Commentary Code Commenter
+  Plug 'tpope/vim-commentary'
 
   " # NERDTree File manager
   Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
   Plug 'xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+  " Plug 'tpope/vim-vinegar'
+
+  " " # Fern File Manager
+  Plug 'lambdalisue/fern.vim', {'on': 'Fern'}
+  Plug 'lambdalisue/fern-renderer-devicons.vim', {'on': 'Fern'}
 
   " # PolyGlot Syntax Support
   Plug 'sheerun/vim-polyglot'
@@ -42,7 +47,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-fugitive'
 
   " # Bettr tests Inside of vim
-  Plug 'vim-test/vim-test'
+  " Plug 'vim-test/vim-test'
 
   " # Suround Plugin
   Plug 'tpope/vim-surround'
@@ -63,6 +68,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
   Plug 'junegunn/limelight.vim', {'on': 'Goyo'}
  
+
 
 " Initialize plugin system
 call plug#end()
@@ -129,7 +135,6 @@ set smartcase
 set tagcase       =match
 
 set signcolumn=yes
-set list
 set modeline
 set modelines     =1
 set nostartofline
@@ -138,10 +143,12 @@ set number
 set shortmess     =aoOTI
 set showcmd
 set showmatch
-set showmode
-set list                   " Show non-printable characters.
 let &fcs='eob: '           " Remove ~ at end of buffer
+"set list listchars=tab:\|,trail:·,extends:❯,precedes:❮,nbsp:±
+set list listchars=tab:\|\ ,trail:·,extends:❯,precedes:❮,nbsp:×
+ 
 
+" No backup or swap, we hve git
 set nobackup
 set nowb
 set noswapfile
@@ -150,21 +157,24 @@ set so=7                   " Set 7 lines to the cursor - when moving vertically 
 
 set cmdheight=1            " Height of the command bar
 
-if has('multi_byte') && &encoding ==# 'utf-8'
-  let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
-else
-  let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
-endif
 
 " Colors Settings
 set termguicolors
+set fillchars+=vert:\  
 colorscheme dracula
+set noshowmode
 
 " Split Navingation Mapping
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+map <ScrollWheelUp> <C-U>
+map <ScrollWheelDown> <C-D>
+
+" <TAB>: completion.
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 """"""""""""""""""""
@@ -173,9 +183,16 @@ nnoremap <C-H> <C-W><C-H>
 """"""""""""""""""""
 
 " * Indent Line settings
+let g:indentLine_enabled = 1
 let g:indentLine_setColors = 1
-let g:indentLine_char = '|'
+let g:indentLine_char = '┊'
 "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indent_blankline_extra_indent_level = -1
+let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree_*', '\[defx\]*', 'fern*']
+"let g:indentLine_fileTypeExclude = ['text', 'Defx']
+let g:indentLine_fileTypeExclude = ['fern*']
+
+
 
 
 " * Completion and Coc Settings
@@ -194,6 +211,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'dracula'
+let g:bufferline_echo = 0
 
 
 " * Fzf Settings
@@ -204,28 +222,6 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit'
   \}
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-
-
-" * NERDTree Setup
-let g:NERDTreeShowHidden = 0
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeIgnore = []
-let g:NERDTreeMinimalMenu = 1
-nnoremap <silent> <C-b> :NERDTreeToggle<CR>
-" Close NERDTree if the only window left
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
 
 
 
@@ -275,3 +271,32 @@ endfunction
 
 autocmd! User CodiEnterPre nested call<SID>codi_enter() 
 autocmd! User CodiLeavePre nested call<SID>codi_leave()
+
+
+
+" * NERDTree Config 
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+let g:plug_window = 'noautocmd vertical topleft new'
+nnoremap <silent> <C-b> :NERDTreeToggle <CR>
+let g:NERDTreeMinimalMenu = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize = 28
+let NERDTreeDirArrowExpandable = ''
+let NERDTreeDirArrowCollapsible = ''
+let g:NERDTreeNodeDelimiter = "\u00a0"
+
+
+
+
+" * Fern settings
+"let g:fern#renderer = "devicons"
+"autocmd BufEnter fern call let g:indentLine_enabled = 0
+"nnoremap <silent> <C-b> :Fern . -drawer -toggle <CR>
+
+" * Nertw Settings
+"let g:netrw_banner=0
+"let g:netrw_winsize=20
+"let g:netrw_liststyle=2
