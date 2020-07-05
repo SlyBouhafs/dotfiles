@@ -3,8 +3,9 @@
 "                  "
 """"""""""""""""""""
 
+
 " Directory for plugins
-call plug#begin(stdpath('data') . '/plugged')
+call plug#begin(stdpath('data') . '/plugged')"{{{}}}
 
   " # Dracula Theme
   Plug 'dracula/vim', { 'as': 'dracula' } 
@@ -123,7 +124,7 @@ set report      =0         " Always report changed lines.
 set synmaxcol   =200       " Only highlight the first 200 columns.
 
 set foldmethod    =marker
-set foldcolumn    =2
+set foldcolumn    =1
 set foldopen     -=hor
 set foldopen     +=jump
 set foldtext      =mhi#foldy()
@@ -140,7 +141,8 @@ set modelines     =1
 set nostartofline
 set ruler
 set number
-set shortmess     =aoOTI
+set numberwidth=3
+set shortmess     =aoOTIc
 set showcmd
 set showmatch
 let &fcs='eob: '           " Remove ~ at end of buffer
@@ -174,7 +176,15 @@ map <ScrollWheelUp> <C-U>
 map <ScrollWheelDown> <C-D>
 
 " <TAB>: completion.
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
 
 
 """"""""""""""""""""
@@ -276,19 +286,19 @@ autocmd! User CodiLeavePre nested call<SID>codi_leave()
 
 " * NERDTree Config 
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
-let g:plug_window = 'noautocmd vertical topleft new'
+autocmd BufEnter NERD_tree_* set signcolumn=no
+let g:plug_window = 'noautocmd vertical botright new'
 nnoremap <silent> <C-b> :NERDTreeToggle <CR>
 let g:NERDTreeMinimalMenu = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 28
-let NERDTreeDirArrowExpandable = ''
-let NERDTreeDirArrowCollapsible = ''
+let g:NERDTreeDirArrows=0
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
 let g:NERDTreeNodeDelimiter = "\u00a0"
-
-
+let g:NERDTreeChDirMode = 2
 
 
 " * Fern settings
