@@ -1,23 +1,18 @@
-{
-  "codeLens.enable" : true,
-  "codeLens.separator": "‣",
+{ 
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": ["html","css","markdown","Markdown","javascript","javascriptreact","typescript","typescriptreact"],
+  "eslint.packageManager": "npm",
+  "eslint.nodePath": "/usr/local/lib/node_modules",
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "prettier.disableSuccessMessage": true,
   "tsserver.formatOnType": true,
-  "coc.preferences.formatOnType": true,
-  "coc.preferences.formatOnSaveFiletypes": ["html","css","markdown","Markdown","javascript","javascriptreact","typescript","typescriptreact"],
   "diagnostic.errorSign" : "●", 
   "diagnostic.warningSign" : "▲",
   "diagnostic.infoSign": "◆",
   "diagnostic.hintSign": "◇",
-  "explorer.width": 30,
-  "explorer.icon.enableNerdfont": true,
-  "explorer.previewAction.onHover": false,
-  "explorer.keyMappings": {
-    "<cr>": ["expandable?", "expand", "open"],
-    "v": "open:vsplit"
-  }
+  "codeLens.enable" : true,
+  "codeLens.separator": "‣"
 } 
 
 
