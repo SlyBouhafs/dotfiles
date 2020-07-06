@@ -22,8 +22,8 @@ call plug#begin(stdpath('data') . '/plugged')"{{{}}}
   " Plug 'tpope/vim-vinegar'
 
   " " # Fern File Manager
-  Plug 'lambdalisue/fern.vim', {'on': 'Fern'}
-  Plug 'lambdalisue/fern-renderer-devicons.vim', {'on': 'Fern'}
+  " Plug 'lambdalisue/fern.vim', {'on': 'Fern'}
+  " Plug 'lambdalisue/fern-renderer-devicons.vim', {'on': 'Fern'}
 
   " # PolyGlot Syntax Support
   Plug 'sheerun/vim-polyglot'
@@ -56,7 +56,7 @@ call plug#begin(stdpath('data') . '/plugged')"{{{}}}
   " # Airline Statusline for better or worse 
   Plug 'vim-airline/vim-airline'
 
-  " * Codi live repl for prototyping
+  " # Codi live repl for prototyping
   Plug 'metakirby5/codi.vim', {'on': 'Codi' }
 
   " # Devicons For better Icons
@@ -106,7 +106,7 @@ set hidden                 " Switch between buffers without having to save first
 set laststatus  =2         " Always show statusline.
 set display     =lastline  " Show as much as possible of the last line.
 
-set showmode               " Show current mode in command-line.
+set noshowmode             " Don't show current mode in command-line since we have airline
 set showcmd                " Show already typed keys when more are expected.
 
 set incsearch              " Highlight while searching with / or ?.
@@ -143,28 +143,23 @@ set ruler
 set number
 set numberwidth=3
 set shortmess     =aoOTIc
-set showcmd
 set showmatch
 let &fcs='eob: '           " Remove ~ at end of buffer
 "set list listchars=tab:\|,trail:·,extends:❯,precedes:❮,nbsp:±
 set list listchars=tab:\|\ ,trail:·,extends:❯,precedes:❮,nbsp:×
- 
+set so=7                   " Set 7 lines to the cursor - when moving vertically using j/k
+set cmdheight=1            " Height of the command bar
 
-" No backup or swap, we hve git
+" No backup or swap, we have git for that
 set nobackup
 set nowb
 set noswapfile
-
-set so=7                   " Set 7 lines to the cursor - when moving vertically using j/k
-
-set cmdheight=1            " Height of the command bar
 
 
 " Colors Settings
 set termguicolors
 set fillchars+=vert:\  
 colorscheme dracula
-set noshowmode
 
 " Split Navingation Mapping
 nnoremap <C-J> <C-W><C-J>
@@ -198,9 +193,8 @@ let g:indentLine_setColors = 1
 let g:indentLine_char = '┊'
 "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indent_blankline_extra_indent_level = -1
-let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree_*', '\[defx\]*', 'fern*']
+let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree_*']
 "let g:indentLine_fileTypeExclude = ['text', 'Defx']
-let g:indentLine_fileTypeExclude = ['fern*']
 
 
 
@@ -241,7 +235,6 @@ function! s:goyo_enter()
   "   silent !tmux set status off
   "   silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
   "endif
-  set noshowmode
   set noshowcmd
   set scrolloff=999
   set nonumber
@@ -254,7 +247,6 @@ function! s:goyo_leave()
   " if executable('tmux') && strlen($TMUX) silent !tmux set status on
   "   silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
   " endif
-  set showmode
   set showcmd
   set scrolloff=4
   set number
@@ -269,13 +261,11 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " * Codi Settings
 function! s:codi_enter()
   set noshowmode
-  set noshowcmd
   set scrolloff=999
 endfunction
 
 function! s:codi_leave()
   set showmode
-  set showcmd
   set scrolloff=4
 endfunction
 
@@ -285,11 +275,19 @@ autocmd! User CodiLeavePre nested call<SID>codi_leave()
 
 
 " * NERDTree Config 
+" open NERDTree automatically when vim starts up on opening a directory
 autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
+" close vim if the only window left open is a NERDTree
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Dont let vim open files in the NerdTree window
 autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+
+" Remove the sign column on the left to win some space
 autocmd BufEnter NERD_tree_* set signcolumn=no
-let g:plug_window = 'noautocmd vertical botright new'
+
 nnoremap <silent> <C-b> :NERDTreeToggle <CR>
 let g:NERDTreeMinimalMenu = 1
 let g:NERDTreeMinimalUI = 1
@@ -310,3 +308,8 @@ let g:NERDTreeChDirMode = 2
 "let g:netrw_banner=0
 "let g:netrw_winsize=20
 "let g:netrw_liststyle=2
+"
+
+" * Vim-plug settings
+" always open vim-plug in a vertical split on the right
+let g:plug_window = 'noautocmd vertical botright new'
