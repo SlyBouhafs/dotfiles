@@ -5,7 +5,7 @@
 
 
 " Directory for plugins
-call plug#begin(stdpath('data') . '/plugged')"{{{}}}
+call plug#begin(stdpath('data') . '/plugged')
 
   " # Dracula Theme
   Plug 'dracula/vim', { 'as': 'dracula' } 
@@ -52,6 +52,7 @@ call plug#begin(stdpath('data') . '/plugged')"{{{}}}
 
   " # Suround Plugin
   Plug 'tpope/vim-surround'
+
 
   " # Airline Statusline for better or worse 
   Plug 'vim-airline/vim-airline'
@@ -167,8 +168,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-map <ScrollWheelUp> <C-U>
-map <ScrollWheelDown> <C-D>
+" map <ScrollWheelUp> <C-U>
+" map <ScrollWheelDown> <C-D>
 
 " <TAB>: completion.
 function! s:check_back_space() abort
@@ -288,7 +289,7 @@ autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | en
 " Remove the sign column on the left to win some space
 autocmd BufEnter NERD_tree_* set signcolumn=no
 
-nnoremap <silent> <C-b> :NERDTreeToggle <CR>
+nnoremap <silent> <C-x> :NERDTreeToggle <CR>
 let g:NERDTreeMinimalMenu = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 28
@@ -297,15 +298,12 @@ let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 let g:NERDTreeNodeDelimiter = "\u00a0"
 let g:NERDTreeChDirMode = 2
+let NERDTreeAutoDeleteBuffer = 1 
 
-
-" * Fern settings
-"let g:fern#renderer = "devicons"
-"autocmd BufEnter fern call let g:indentLine_enabled = 0
-"nnoremap <silent> <C-b> :Fern . -drawer -toggle <CR>
 
 " * Nertw Settings
 "let g:netrw_banner=0
+"B
 "let g:netrw_winsize=20
 "let g:netrw_liststyle=2
 "
