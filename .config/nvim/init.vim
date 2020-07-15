@@ -161,6 +161,7 @@ set noswapfile
 set termguicolors
 set fillchars+=vert:\  
 colorscheme dracula
+set background=dark
 
 " Split Navingation Mapping
 nnoremap <C-J> <C-W><C-J>
