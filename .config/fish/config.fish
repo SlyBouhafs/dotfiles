@@ -10,6 +10,4 @@ set -g fish_user_paths "/usr/local/opt/icu4c/sbin" $fish_user_paths
 set -g fish_user_paths "/usr/local/opt/python@3.8/bin" $fish_user_paths
 
 starship init fish | source
-
-## Iterm2 shell integration
-test -e /Users/sly/.iterm2_shell_integration.fish ; and source /Users/sly/.iterm2_shell_integration.fish ; or true
+kitty + complete setup fish | source
