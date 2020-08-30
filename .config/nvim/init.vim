@@ -21,10 +21,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
   " Plug 'tpope/vim-vinegar'
 
-  " " # Fern File Manager
-  " Plug 'lambdalisue/fern.vim', {'on': 'Fern'}
-  " Plug 'lambdalisue/fern-renderer-devicons.vim', {'on': 'Fern'}
-
   " # PolyGlot Syntax Support
   Plug 'sheerun/vim-polyglot'
 
