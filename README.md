@@ -5,7 +5,7 @@ Personal dotfiles for backup
 2. use the ` conf ` command as a git command to add files to repo ex :
 ``` Shell
 conf status
-conf add .vimrc
+conf add .config/nvim/init.vim
 conf commit -m "Add vimrc"
 conf push
 ```
