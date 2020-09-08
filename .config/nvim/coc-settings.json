@@ -13,7 +13,14 @@
   "diagnostic.infoSign": "◆",
   "diagnostic.hintSign": "◇",
   "codeLens.enable" : true,
-  "codeLens.separator": "‣"
+  "codeLens.separator": "‣",
+  "suggest.noselect": false,
+  "suggest.minTriggerInputLength": 2,
+  "suggest.acceptSuggestionOnCommitCharacter": true,
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.disableMenuShortcut": true,
+  "suggest.timeout": 500,
+    "coc.preferences.currentFunctionSymbolAutoUpdate": true
 } 
 
 
