@@ -25,7 +25,10 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " # Fzf support for fast fuzzy finding
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
-  Plug 'junegunn/fzf.vim', {'on': 'FZF'}
+  Plug 'junegunn/fzf.vim'
+  " # Changes Vim working directory to project root. 
+  Plug 'airblade/vim-rooter'
+
 
   " # Emmet Abbriviations support
   Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript', 'typescript']}
@@ -47,7 +50,6 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " # Suround Plugin
   Plug 'tpope/vim-surround'
-
 
   " # Airline Statusline for better or worse 
   Plug 'vim-airline/vim-airline'
@@ -71,6 +73,8 @@ call plug#begin(stdpath('data') . '/plugged')
 
 " Initialize plugin system
 call plug#end()
+
+
 
 """""""""""""""""""""""""""""""
 "     End of Plugins List     "
@@ -166,6 +170,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Changing the leader to Space
+let mapleader = ","
+
 " map <ScrollWheelUp> <C-U>
 " map <ScrollWheelDown> <C-D>
 
@@ -249,7 +256,45 @@ let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit'
   \}
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+map <C-f> :Files<CR>
+map <leader>b :Buffers<CR>
+nnoremap <leader>g :Rg<CR>
+nnoremap <leader>t :Tags<CR>
+nnoremap <leader>m :Marks<CR>
+
+let g:fzf_tags_command = 'ctags -R'
+" Border color
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.7, 'border': 'sharp' } }
+" let g:fzf_layout = { 'down': '40%' }
+"
+"
+
+let $FZF_DEFAULT_OPTS = '--info=inline'
+let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
 
 
 
@@ -323,13 +368,6 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 let g:NERDTreeChDirMode = 2
 let NERDTreeAutoDeleteBuffer = 1 
 
-
-" * Nertw Settings
-"let g:netrw_banner=0
-"B
-"let g:netrw_winsize=20
-"let g:netrw_liststyle=2
-"
 
 " * Vim-plug settings
 " always open vim-plug in a vertical split on the right
