@@ -20,7 +20,15 @@
   "suggest.triggerAfterInsertEnter": true,
   "suggest.disableMenuShortcut": true,
   "suggest.timeout": 500,
-    "coc.preferences.currentFunctionSymbolAutoUpdate": true
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  // explorer
+  "explorer.width": 28,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.keyMappings": {
+    "<cr>": ["expandable?", "expand", "open"],
+    "v": "open:vsplit"
+  }
 } 
 
 
