@@ -1,6 +1,6 @@
-""""""""""""""""""""
+"""""""""""""""""""
 " Start of Plugins "
-"                  "
+                 "
 """"""""""""""""""""
 
 " Directory for plugins
@@ -16,8 +16,8 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-commentary'
 
   " # NERDTree File manager
-  Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
-  Plug 'xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+  " Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+  " Plug 'xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
   " Plug 'tpope/vim-vinegar'
 
   " # PolyGlot Syntax Support
@@ -189,8 +189,8 @@ let g:indentLine_setColors = 1
 let g:indentLine_char = '┊'
 "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indent_blankline_extra_indent_level = -1
-let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree_*']
-"let g:indentLine_fileTypeExclude = ['text', 'Defx']
+let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree_*', 'coc-explorer']
+let g:indentLine_fileTypeExclude = ['coc-explorer']
 
 
 " * Completion and Coc Settings
@@ -236,17 +236,37 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Coc Explorer configuration
+nmap <leader>x :CocCommand explorer --preset simplify<CR>
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+
+let g:coc_explorer_global_presets = {
+\   '.vim': {
+\     'root-uri': '~/.vim',
+\   },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   }
+\ }
+
+" Don't let vim open file in Explorer buffer.
+autocmd BufEnter * if bufname('#') =~# "coc-explorer" && winnr('$') > 1 | b# | endif
+
+
 
 
 
 " * Airline Settings
-let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'dracula'
 let g:bufferline_echo = 0
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+
 
 
 " * Fzf Settings
@@ -345,28 +365,28 @@ autocmd! User CodiLeavePre nested call<SID>codi_leave()
 
 " * NERDTree Config 
 " open NERDTree automatically when vim starts up on opening a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
-" close vim if the only window left open is a NERDTree
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" " close vim if the only window left open is a NERDTree
+" autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Dont let vim open files in the NerdTree window
-autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+" " Dont let vim open files in the NerdTree window
+" autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
 
-" Remove the sign column on the left to win some space
-autocmd BufEnter NERD_tree_* set signcolumn=no
+" " Remove the sign column on the left to get some space
+" autocmd BufEnter NERD_tree_* set signcolumn=no
 
-nnoremap <silent> <C-x> :NERDTreeToggle <CR>
-let g:NERDTreeMinimalMenu = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeWinSize = 28
-let g:NERDTreeDirArrows=0
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
-let g:NERDTreeNodeDelimiter = "\u00a0"
-let g:NERDTreeChDirMode = 2
-let NERDTreeAutoDeleteBuffer = 1 
+" nnoremap <silent> <C-x> :NERDTreeToggle <CR>
+" let g:NERDTreeMinimalMenu = 1
+" let g:NERDTreeMinimalUI = 1
+" let g:NERDTreeWinSize = 28
+" let g:NERDTreeDirArrows=0
+" let g:NERDTreeDirArrowExpandable = ''
+" let g:NERDTreeDirArrowCollapsible = ''
+" let g:NERDTreeNodeDelimiter = "\u00a0"
+" let g:NERDTreeChDirMode = 2
+" let NERDTreeAutoDeleteBuffer = 1 
 
 
 " * Vim-plug settings
