@@ -70,6 +70,9 @@ call plug#begin(stdpath('data') . '/plugged')
   " # Jump to any definition and references
   " Plug 'pechorin/any-jump.vim'
 
+  " Solve leetcode problems inside of vim
+  Plug 'ianding1/leetcode.vim', {'on':'LeetCodeSignIn'}
+
 
 " Initialize plugin system
 call plug#end()
@@ -252,6 +255,13 @@ let g:coc_explorer_global_presets = {
 " Don't let vim open file in Explorer buffer.
 autocmd BufEnter * if bufname('#') =~# "coc-explorer" && winnr('$') > 1 | b# | endif
 
+
+" * Leetcode plugin settings
+let g:leetcode_browser = 'firefox'
+let g:leetcode_solution_filetype = 'javascript'
+let g:leetcode_hide_paid_only = 1
+let g:leetcode_hide_topics = 1
+let g:leetcode_hide_companies = 1
 
 
 
