@@ -1,6 +1,6 @@
-"""""""""""""""""""
+""""""""""""""""""""
 " Start of Plugins "
-                 "
+"                  "
 """"""""""""""""""""
 
 " Directory for plugins
@@ -262,6 +262,10 @@ let g:leetcode_solution_filetype = 'javascript'
 let g:leetcode_hide_paid_only = 1
 let g:leetcode_hide_topics = 1
 let g:leetcode_hide_companies = 1
+
+
+" * Emmet plugin settings
+let g:user_emmet_leader_key='<leader>'
 
 
 
