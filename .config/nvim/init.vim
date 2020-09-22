@@ -376,6 +376,9 @@ autocmd! User CodiEnterPre nested call<SID>codi_enter()
 autocmd! User CodiLeavePre nested call<SID>codi_leave()
 
 
+" * vim-rooter settings
+" stop Rooter echoing the project directory:
+let g:rooter_silent_chdir = 1
 
 " * NERDTree Config 
 " open NERDTree automatically when vim starts up on opening a directory
