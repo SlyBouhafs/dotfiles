@@ -1,8 +1,7 @@
 { 
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSaveFiletypes": ["html","css","markdown","Markdown","javascript","javascriptreact","typescript","typescriptreact"],
-  "eslint.packageManager": "npm",
-  "eslint.nodePath": "/usr/local/lib/node_modules",
+  "eslint.packageManager": "yarn",
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "prettier.disableSuccessMessage": true,
