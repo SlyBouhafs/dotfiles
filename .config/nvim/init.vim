@@ -174,7 +174,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Changing the leader to Space
-let mapleader = ","
+let mapleader = " "
 
 " map <ScrollWheelUp> <C-U>
 " map <ScrollWheelDown> <C-D>
