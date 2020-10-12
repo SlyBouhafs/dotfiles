@@ -255,6 +255,9 @@ let g:coc_explorer_global_presets = {
 " Don't let vim open file in Explorer buffer.
 autocmd BufEnter * if bufname('#') =~# "coc-explorer" && winnr('$') > 1 | b# | endif
 
+" Coc-yank settings 
+nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
+
 
 " * Leetcode plugin settings
 let g:leetcode_browser = 'firefox'
@@ -409,3 +412,4 @@ let g:rooter_silent_chdir = 1
 " * Vim-plug settings
 " always open vim-plug in a vertical split on the right
 let g:plug_window = 'noautocmd vertical botright new'
+
