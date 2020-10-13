@@ -27,7 +27,9 @@
   "explorer.keyMappings": {
     "<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"],
     "v": "open:vsplit"
-  }
+  },
+  // yank
+  "yank.highlight.duration": 100
 } 
 
 
