@@ -174,7 +174,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Changing the leader to Space
-let mapleader = " "
+let mapleader = ","
 
 " map <ScrollWheelUp> <C-U>
 " map <ScrollWheelDown> <C-D>
@@ -288,6 +288,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 " * Fzf Settings
 nnoremap <C-p> :FZF<CR>
+nnoremap <leader>p :FZF<CR>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
@@ -301,6 +302,7 @@ let g:fzf_action = {
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 map <C-f> :Files<CR>
+map <leader>f :Files<CR>
 map <leader>b :Buffers<CR>
 nnoremap <leader>g :Rg<CR>
 nnoremap <leader>t :Tags<CR>
