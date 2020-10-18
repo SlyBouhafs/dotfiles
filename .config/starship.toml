@@ -2,18 +2,21 @@
 add_newline = false
 
 # Overwrite a default_prompt_order and  use custom prompt_order
-prompt_order=["directory",
-    "git_branch",
-    "git_commit",
-    "git_state",
-    "git_status",
-    "character"]
+format ="""\
+    $hostname\
+    $directory\
+    $git_branch\
+    $git_commit\
+    $git_state\
+    $git_status\
+    $character\
+    """
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]      # The name of the module we are configuring is "character"
-symbol = "❯"     # The "symbol" segment is being set to "➜"
-error_symbol = "●"
-#use_symbol_for_status = true
+success_symbol = "[❯](bold green)"     # The "symbol" segment is being set to "➜"
+error_symbol = "[❯](bold red)"
+vicmd_symbol = "[❮](bold yellow)"
 
 
 
