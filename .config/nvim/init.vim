@@ -1,3 +1,10 @@
+" Some paths settings for providers for a faster startup
+let g:python3_host_prog = '/usr/bin/python3'
+let g:python_host_prog = '/usr/bin/python2'
+let g:ruby_host_prog = '/usr/local/bin/neovim-ruby-host'
+let g:node_host_prog = '/usr/local/bin/neovim-node-host'
+
+
 """"""""""""""""""""
 " Start of Plugins "
 "                  "
