@@ -1,12 +1,32 @@
-{ 
+{
+  "languageserver": {
+    "clojure-lsp": {
+      "command": "bash",
+      "args": ["-c", "clojure-lsp"],
+      "filetypes": ["clojure"],
+      "rootPatterns": ["project.clj"],
+      "additionalSchemes": ["jar", "zipfile"],
+      "trace.server": "verbose",
+      "initializationOptions": {}
+    }
+  },
   "coc.preferences.formatOnType": true,
-  "coc.preferences.formatOnSaveFiletypes": ["html","css","markdown","Markdown","javascript","javascriptreact","typescript","typescriptreact"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "html",
+    "css",
+    "markdown",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json"
+  ],
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-  "diagnostic.errorSign" : "●", 
-  "diagnostic.warningSign" : "▲",
+  "diagnostic.errorSign": "●",
+  "diagnostic.warningSign": "▲",
   "diagnostic.infoSign": "◆",
   "diagnostic.hintSign": "◇",
-  "codeLens.enable" : true,
+  "codeLens.enable": true,
   "codeLens.separator": "‣",
   "suggest.noselect": false,
   "suggest.minTriggerInputLength": 2,
@@ -14,17 +34,18 @@
   "suggest.triggerAfterInsertEnter": true,
   "suggest.disableMenuShortcut": true,
   "suggest.timeout": 500,
-  // Eslint
   "eslint.packageManager": "yarn",
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  // Prettier
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "prettier.disableSuccessMessage": true,
   "prettier.eslintIntegration": true,
-  // Tsserver
   "tsserver.ignoreLocalTsserver": true,
   "tsserver.formatOnType": true,
-  // explorer
   "explorer.width": 28,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
@@ -32,8 +53,5 @@
     "<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"],
     "v": "open:vsplit"
   },
-  // yank
   "yank.highlight.duration": 100
-} 
-
-
+}

@@ -1,4 +1,4 @@
-" Some paths settings for providers for a faster startup
+" Some providers paths settings for a faster startup
 let g:python3_host_prog = '/usr/bin/python3'
 let g:python_host_prog = '/usr/bin/python2'
 let g:ruby_host_prog = '/usr/local/bin/neovim-ruby-host'
@@ -26,6 +26,17 @@ call plug#begin(stdpath('data') . '/plugged')
   " Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
   " Plug 'xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
   " Plug 'tpope/vim-vinegar'
+  
+  " # Vim-iced for that sweet clojure IDE
+  Plug 'guns/vim-sexp',    {'for': 'clojure'}
+  Plug 'tpope/vim-sexp-mappings-for-regular-people', {'for': 'clojure'}
+  Plug 'olical/conjure', {'for': 'clojure', 'tag': 'v4.9.0'}
+  Plug 'eraserhd/parinfer-rust', {'for': 'clojure', 'do': 'cargo build --release'}
+  " Plug 'liquidz/vim-iced', {'for': 'clojure'}
+  " Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
+  " Plug 'luochen1990/rainbow', {'for': 'clojure'}
+  " 
+  
 
   " # PolyGlot Syntax Support
   Plug 'sheerun/vim-polyglot'
@@ -109,8 +120,9 @@ syntax on                  " Enable syntax highlighting.
 set autoindent             " Indent according to previous line.
 set smartindent            " Smart indent
 set expandtab              " Use spaces instead of tabs.
-set softtabstop =2         " Tab key indents by 4 spaces.
-set shiftwidth  =2         " >> indents by 4 spaces.
+set tabstop =2            " How many columns of whitespace
+set softtabstop =2         " Tab key indents by 2 spaces.
+set shiftwidth  =2         " >> indents by 2 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
 set backspace   =indent,eol,start  " Make backspace work as you would expect.
@@ -182,6 +194,7 @@ nnoremap <C-H> <C-W><C-H>
 
 " Changing the leader to Space
 let mapleader = ","
+let maplocalleader = ","
 
 " map <ScrollWheelUp> <C-U>
 " map <ScrollWheelDown> <C-D>
@@ -422,3 +435,11 @@ let g:rooter_silent_chdir = 1
 " always open vim-plug in a vertical split on the right
 let g:plug_window = 'noautocmd vertical botright new'
 
+
+" * Vim-iced settings
+" Enable vim-iced's default key mapping
+let g:iced_enable_default_key_mappings = v:true
+
+
+" * Rainbow Settings 
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
