@@ -1,5 +1,4 @@
-" ======================== Vim-Plug ============================= "
-" {{{
+" ======================== Vim-Plug ============================= " {{{
 
 " auto-install vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -14,12 +13,10 @@ call plug#begin(stdpath('data') . '/plugged')
 
 "}}}
 
-" ======================== Plugins ============================== "
-" {{{
+" ======================== Plugins ============================== " {{{
 
 
-" ================= looks and GUI stuff ================== "
-" {{{
+" ================= looks and GUI stuff ================== "{{{
 
 
   " # Dracula Theme
@@ -35,8 +32,7 @@ call plug#begin(stdpath('data') . '/plugged')
 " }}}
 
 
-" ================= Functionalities ================= "
-" {{{
+" ================= Functionalities ================= " {{{
 
   " # Better indent lines
   Plug 'yggdroot/indentline'
@@ -91,12 +87,11 @@ call plug#begin(stdpath('data') . '/plugged')
   " Initialize plugin system
   call plug#end()
 
-  " }}}
+" }}}
 " }}}
 
-" ======================== General Config ======================= "
-" {{{
-"
+" ======================== General Config ======================= " {{{
+
 set nocompatible                                    " You want Vim, not vi.
 
 filetype plugin indent on                           " Load plugins according to detected filetype.
@@ -146,9 +141,7 @@ set foldmethod    =marker
 set foldcolumn    =1
 set foldopen     -=hor
 set foldopen     +=jump
-set foldtext      =mhi#foldy()
-set scrolloff     =4
-set sidescroll    =5
+set foldtext=MyFoldText()
 set tagcase       =match
 
 set signcolumn=yes
@@ -160,9 +153,10 @@ set number
 set numberwidth=3
 set shortmess     =aoOTIc
 set showmatch
-let &fcs='eob: '           " Remove ~ at end of buffer
-set so=7                   " Set 7 lines to the cursor - when moving vertically using j/k
-set cmdheight=1            " Height of the command bar
+let &fcs='eob: '                                    " Remove ~ at end of buffer
+set so=7                                            " Set 7 lines to the cursor  vertically - when moving using j/k
+set ss=5                                            " Set 5 lines to the cursor horizontally
+set cmdheight=1                                     " Height of the command bar
 
 " No backup or swap, we have git for that
 set nobackup
@@ -178,8 +172,7 @@ set background=dark
 
 " }}}
 
-" ======================== Plugins settings ===================== "
-" {{{
+" ======================== Plugins settings ===================== " {{{
 
 "" built in plugins
 let loaded_netrw = 0                                    " diable netew
@@ -291,8 +284,7 @@ let g:fzf_colors =
 
 " }}}
 
-" ======================== Functions ============================ "
-" {{{
+" ======================== Functions ============================ " {{{
 
 " * Completion and Coc Settings
 " check if last inserted char is a backspace (used by coc pmenu)"
@@ -353,6 +345,13 @@ function! s:goyo_leave()
   set cursorline
   set signcolumn=yes
   Limelight!
+endfunction
+
+" Fold function
+function MyFoldText()
+  let line = getline(v:foldstart)
+  let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+  return v:folddashes . sub
 endfunction
 
 " }}}
