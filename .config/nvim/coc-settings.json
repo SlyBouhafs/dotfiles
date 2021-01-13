@@ -34,13 +34,14 @@
   "suggest.triggerAfterInsertEnter": true,
   "suggest.disableMenuShortcut": true,
   "suggest.timeout": 500,
-  "eslint.packageManager": "yarn",
+  "eslint.packageManager": "npm",
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": [
+  "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "html"
   ],
   "prettier.disableSuccessMessage": true,
   "prettier.eslintIntegration": true,
