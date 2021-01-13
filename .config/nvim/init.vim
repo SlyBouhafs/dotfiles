@@ -99,7 +99,7 @@ syntax on                                           " Enable syntax highlighting
 
 set mouse=a                                         " enable mouse scrolling
 set autoindent                                      " Indent according to previous line.
-set expandtab smarttab                              " Use spaces instead of tabs.
+set expandtab smarttab smartindent                  " Use spaces instead of tabs.
 set tabstop=2 softtabstop=2 shiftwidth=2            " How many columns of whitespace
 set shiftround                                      " >> indents to next multiple of 'shiftwidth'.
 set incsearch ignorecase smartcase hlsearch         " highlight text while searching
