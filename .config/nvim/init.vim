@@ -97,6 +97,7 @@ set nocompatible                                    " You want Vim, not vi.
 filetype plugin indent on                           " Load plugins according to detected filetype.
 syntax on                                           " Enable syntax highlighting.
 
+
 set mouse=a                                         " enable mouse scrolling
 set autoindent                                      " Indent according to previous line.
 set expandtab smarttab smartindent                  " Use spaces instead of tabs.
@@ -122,7 +123,7 @@ set undodir=/tmp                                    " undo temp file directory
 set ttyfast                                         " Faster redrawing.
 set lazyredraw                                      " Only redraw when necessary.
 set redrawtime=10000
-set re=1
+set re=0                                            " Set vim to use the new(0)/old(1) regex engine for syntax
 set scrolljump=5
 
 set splitbelow                                      " Open new windows below the current window.
@@ -356,8 +357,7 @@ endfunction
 
 " }}}
 
-" ======================== Commands ============================= "
-" {{{
+" ======================== Commands ============================= " {{{
 
 " * Goyo Commands
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -390,14 +390,17 @@ au BufWritePre * :%s/\s\+$//e
 
 " }}}
 
-" ======================== Custom Mappings ====================== "
-" {{{
+" ======================== Custom Mappings ====================== " {{{
 
 " Close buffer
 nmap <leader>q :bd<CR>
 
 " Reload config
 nmap <leader>r :so ~/.config/nvim/init.vim<CR>
+
+" Redraw the screen
+noremap <F12> <Esc>:syntax sync fromstart<CR>
+inoremap <F12> <C-o>:syntax sync fromstart<CR>
 
 " disable hl with 2 esc
 noremap <silent><esc> <esc>:noh<CR><esc>
