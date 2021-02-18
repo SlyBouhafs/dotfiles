@@ -124,7 +124,7 @@ set ttyfast                                         " Faster redrawing.
 set lazyredraw                                      " Only redraw when necessary.
 set redrawtime=10000
 set re=0                                            " Set vim to use the new(0)/old(1) regex engine for syntax
-set scrolljump=5
+set scrolljump=0
 
 set splitbelow                                      " Open new windows below the current window.
 set splitright                                      " Open new windows right of the current window.
@@ -133,7 +133,7 @@ set emoji                                           " enable emojis
 set cursorline                                      " Find the current line quickly.
 set wrapscan                                        " Searches wrap around end-of-file.
 set report      =0                                  " Always report changed lines.
-set synmaxcol   =200                                " Only highlight the first 200 columns.
+set synmaxcol   =0                                  " Maximum column in which to search for syntax items.
 
 set grepprg=rg\ --vimgrep                           " use rg as default grepper
 
